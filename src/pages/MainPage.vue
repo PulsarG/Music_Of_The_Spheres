@@ -11,9 +11,9 @@
     </button>
   </div>
 
-  <audio-libsolar v-show="but[0]"></audio-libsolar>
-  <audio-libstars v-show="but[1]"></audio-libstars>
-  <audio-objects v-show="but[2]"></audio-objects>
+  <audio-libsolar :Items="ItemsSolar" v-show="but[0]"></audio-libsolar>
+  <audio-libstars :Items="ItemsStars" v-show="but[1]"></audio-libstars>
+  <audio-objects :Items="ItemsObjects" v-show="but[2]"></audio-objects>
 </template>
 
 <script>
@@ -21,7 +21,7 @@ import MenuButton from "@/ui/MenuButton.vue";
 import AudioLibsolar from "@/components/AudioLibsolar.vue";
 import AudioLibstars from "@/components/AudioLibstars.vue";
 import AudioObjects from "@/components/AudioObjects.vue";
-
+import axios from 'axios';
 import AudioItem from '@/ui/AudioItem.vue';
 export default {
   components: { MenuButton, AudioLibsolar, AudioLibstars, AudioObjects, AudioItem, },
@@ -34,6 +34,9 @@ export default {
       },
 
       isClick: false,
+      ItemsSolar: [{}],
+      ItemsStars: [{}],
+      ItemsObjects: [{}],
     }
   },
   methods: {
@@ -51,7 +54,60 @@ export default {
       this.but[0] = false;
       this.but[1] = false;
       this.but[2] = false;
-    }
+    },
+    loadArrSolar() {
+      try {
+        axios.get("https://mots-e43e9-default-rtdb.europe-west1.firebasedatabase.app/solar.json")
+          .then((response) => {
+            let array = [];
+            for (var i in response.data)
+              array.push([i, response.data[i]]);
+            let j = array.length;
+            for (let i = 0; i < j; i++) {
+              this.ItemsSolar.push(array[i][1]);
+            }
+          });
+      } catch (e) {
+        alert(e);
+      }
+    },
+    loadArrStars() {
+      try {
+        axios.get("https://mots-e43e9-default-rtdb.europe-west1.firebasedatabase.app/stars.json")
+          .then((response) => {
+            let array = [];
+            for (var i in response.data)
+              array.push([i, response.data[i]]);
+            let j = array.length;
+            for (let i = 0; i < j; i++) {
+              this.ItemsStars.push(array[i][1]);
+            }
+          });
+      } catch (e) {
+        alert(e);
+      }
+    },
+    loadArrObjects() {
+      try {
+        axios.get("https://mots-e43e9-default-rtdb.europe-west1.firebasedatabase.app/objects.json")
+          .then((response) => {
+            let array = [];
+            for (var i in response.data)
+              array.push([i, response.data[i]]);
+            let j = array.length;
+            for (let i = 0; i < j; i++) {
+              this.ItemsObjects.push(array[i][1]);
+            }
+          });
+      } catch (e) {
+        alert(e);
+      }
+    },
+  },
+  mounted() {
+    this.loadArrSolar();
+    this.loadArrStars();
+    this.loadArrObjects();
   }
 }
 </script>

@@ -2,15 +2,11 @@
     <div class="lib">
 
         <div class="btns">
-            <button class="btn" @click="setLock('1');" v-bind:class="{ onclick: but[1] }">
-                Пульсар (PRS B0329+54)
-            </button>
-            <button class="btn" @click="setLock('2');" v-bind:class="{ onclick: but[2] }">
-                Квазар
-            </button>
-            <button class="btn" @click="setLock('3');" v-bind:class="{ onclick: but[3] }">
-                Черная Дыра (GRS 1916+105)
-            </button>
+            <div class="btns" v-for="i in Items" :key="i.name">
+                <button class="btn" @click="settLock(i)">
+                    {{ i.name }}
+                </button>
+            </div>
         </div>
 
         <div class="item" v-show="nItem > 0">
@@ -43,44 +39,13 @@
 <script>
 import AudioItem from '@/ui/AudioItem.vue';
 
-import axios from 'axios';
-
 export default {
+    props: {
+        Items: Array,
+    },
     components: { AudioItem },
     data() {
         return {
-            but: {
-                active1: false,
-                active2: false,
-                active3: false,
-                active4: false,
-                active5: false,
-                active6: false,
-                active7: false,
-                active8: false,
-                active9: false,
-                active10: false,
-                active11: false,
-                active12: false,
-                active13: false,
-                active14: false,
-                active15: false,
-                active16: false,
-            },
-
-            Items: [
-                {
-                    id: 0,
-                    img: "",
-                    audio: "",
-                    wiki: "",
-                    text: "",
-                    name: ""
-                },
-            ],
-
-            /*  Items: [], */
-
 
             isClick: false,
 
@@ -91,46 +56,9 @@ export default {
     },
     methods: {
 
-        setLock(n) {
-            if (!this.but[n]) {
-                this.closeAll();
-                this.but[n] = true;
-                this.nItem = n;
-            } else {
-                this.closeAll();
-                this.but[n] = false;
-                this.nItem = 0;
-            }
+        settLock(i) {
+            this.nItem = this.Items.indexOf(i);
         },
-
-        closeAll() {
-            this.but[0] = false;
-            this.but[1] = false;
-            this.but[2] = false;
-            this.but[3] = false;
-            this.but[4] = false;
-            this.but[5] = false;
-        },
-
-        loadArr() {
-            try {
-                axios.get("https://mots-e43e9-default-rtdb.europe-west1.firebasedatabase.app/objects.json")
-                    .then((response) => {
-                        let array = [];
-                        for (var i in response.data)
-                            array.push([i, response.data[i]]);
-                        let j = array.length;
-                        for (let i = 0; i < j; i++) {
-                            this.Items.push(array[i][1]);
-                        }
-                    });
-            } catch (e) {
-                alert(e);
-            }
-        }
-    },
-    mounted() {
-        this.loadArr();
     }
 }
 </script>
@@ -154,10 +82,11 @@ export default {
     justify-content: center;
     align-items: center;
     margin: auto;
+    flex-direction: row;
 }
 
 .btn {
-    width: 15%;
+    width: 60%;
     height: 40%;
     /* background-color: blue; */
     margin: auto;

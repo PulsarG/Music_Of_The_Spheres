@@ -1,60 +1,12 @@
 <template>
     <div class="lib">
+
         <div class="btns">
-            <button class="btn" @click="setLock('1');" v-bind:class="{ onclick: but[1] }">
-                Земля
-            </button>
-            <button class="btn" @click="setLock('2')" v-bind:class="{ onclick: but[2] }">
-                Солнце
-            </button>
-            <button class="btn" @click="setLock('3')" v-bind:class="{ onclick: but[3] }">
-                Луна
-            </button>
-            <button class="btn" @click="setLock('4')" v-bind:class="{ onclick: but[4] }">
-                Меркурий
-            </button>
-            <button class="btn" @click="setLock('5')" v-bind:class="{ onclick: but[5] }">
-                Венера
-            </button>
-        </div>
-        <div class="btns">
-            <button class="btn" @click="setLock('6');" v-bind:class="{ onclick: but[6] }">
-                Ветра Марса
-            </button>
-            <button class="btn" @click="setLock('7')" v-bind:class="{ onclick: but[7] }">
-                Юпитер
-            </button>
-            <button class="btn" @click="setLock('8')" v-bind:class="{ onclick: but[8] }">
-                Сатурн
-            </button>
-            <button class="btn" @click="setLock('9')" v-bind:class="{ onclick: but[9] }">
-                Уран
-            </button>
-            <button class="btn" @click="setLock('10')" v-bind:class="{ onclick: but[10] }">
-                Нептун
-            </button>
-        </div>
-        <div class="btns">
-            <button class="btn" @click="setLock('11');" v-bind:class="{ onclick: but[11] }">
-                Плутон
-            </button>
-            <button class="btn" @click="setLock('12')" v-bind:class="{ onclick: but[12] }">
-                Ганимед
-            </button>
-            <button class="btn" @click="setLock('13')" v-bind:class="{ onclick: but[13] }">
-                Ио
-            </button>
-            <button class="btn" @click="setLock('14')" v-bind:class="{ onclick: but[14] }">
-                Миранда
-            </button>
-            <button class="btn" @click="setLock('15')" v-bind:class="{ onclick: but[15] }">
-                Кольца Сатурна
-            </button>
-        </div>
-        <div class="btns">
-            <button class="btn" @click="setLock('16');" v-bind:class="{ onclick: but[16] }">
-                Титан
-            </button>
+            <div class="btns" v-for="i in Items" :key="i.name">
+                <button class="btn" @click="settLock(i)">
+                    {{ i.name }}
+                </button>
+            </div>
         </div>
 
         <div class="item" v-show="nItem > 0">
@@ -87,58 +39,13 @@
 <script>
 import AudioItem from '@/ui/AudioItem.vue';
 
-import axios from 'axios';
-
 export default {
+    props: {
+        Items: Array,
+    },
     components: { AudioItem },
     data() {
         return {
-            but: {
-                active1: false,
-                active2: false,
-                active3: false,
-                active4: false,
-                active5: false,
-                active6: false,
-                active7: false,
-                active8: false,
-                active9: false,
-                active10: false,
-                active11: false,
-                active12: false,
-                active13: false,
-                active14: false,
-                active15: false,
-                active16: false,
-            },
-
-            /* Items: {
-                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Africa_and_Europe_from_a_Million_Miles_Away.png/1024px-Africa_and_Europe_from_a_Million_Miles_Away.png",
-                audio: "http://drive.google.com/uc?export=view&id=1qoRFm_c0m7oRVFMGsoAIm2UHHY5JkOPP",
-                wiki: "https://ru.wikipedia.org/wiki/%D0%97%D0%B5%D0%BC%D0%BB%D1%8F",
-            }, */
-
-            Items: [
-                {
-                    id: 0,
-                    img: "",
-                    audio: "",
-                    wiki: "",
-                    text: "",
-                    name: ""
-                },
-                {
-                    id: 1,
-                    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Africa_and_Europe_from_a_Million_Miles_Away.png/1024px-Africa_and_Europe_from_a_Million_Miles_Away.png",
-                    audio: "http://drive.google.com/uc?export=view&id=1qoRFm_c0m7oRVFMGsoAIm2UHHY5JkOPP",
-                    wiki: "https://ru.wikipedia.org/wiki/%D0%97%D0%B5%D0%BC%D0%BB%D1%8F",
-                    text: "Земля́ — третья по удалённости от Солнца планета Солнечной системы. Самая плотная, пятая подиаметру и массе среди всех планет и крупнейшая среди планет земной группы, в которую входят также Меркурий, Венера и Марс.Единственное известное человеку в настоящее время тело во Вселенной, населённое живыми организмами.",
-                    name: "Земля",
-                },
-            ],
-
-            /*  Items: [], */
-
 
             isClick: false,
 
@@ -149,46 +56,9 @@ export default {
     },
     methods: {
 
-        setLock(n) {
-            if (!this.but[n]) {
-                this.closeAll();
-                this.but[n] = true;
-                this.nItem = n;
-            } else {
-                this.closeAll();
-                this.but[n] = false;
-                this.nItem = 0;
-            }
+        settLock(i) {
+            this.nItem = this.Items.indexOf(i);
         },
-
-        closeAll() {
-            this.but[0] = false;
-            this.but[1] = false;
-            this.but[2] = false;
-            this.but[3] = false;
-            this.but[4] = false;
-            this.but[5] = false;
-        },
-
-        loadArr() {
-            try {
-                axios.get("https://mots-e43e9-default-rtdb.europe-west1.firebasedatabase.app/solar.json")
-                    .then((response) => {
-                        let array = [];
-                        for (var i in response.data)
-                            array.push([i, response.data[i]]);
-                        let j = array.length;
-                        for (let i = 0; i < j; i++) {
-                            this.Items.push(array[i][1]);
-                        }
-                    });
-            } catch (e) {
-                alert(e);
-            }
-        }
-    },
-    mounted() {
-        this.loadArr();
     }
 }
 </script>
@@ -212,10 +82,11 @@ export default {
     justify-content: center;
     align-items: center;
     margin: auto;
+    flex-direction: row;
 }
 
 .btn {
-    width: 15%;
+    width: 60%;
     height: 40%;
     /* background-color: blue; */
     margin: auto;
