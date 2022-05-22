@@ -1,13 +1,15 @@
 <template>
     <div class="lib">
 
-        <div class="btns">
+        <div style="display:flex; flex-wrap: wrap;">
             <div class="btns" v-for="i in Items" :key="i.name">
-                <button class="btn" @click="settLock(i)">
+                <button v-show="i.name != null" class="btn" @click="settLock(i)">
                     {{ i.name }}
                 </button>
             </div>
+
         </div>
+
 
         <div class="item" v-show="nItem > 0">
 
@@ -73,23 +75,28 @@ export default {
     margin: auto;
 
     flex-direction: column;
+    /*  border: 1px solid yellow; */
 }
 
 .btns {
-    width: 100%;
-    height: 100px;
+    width: 15%;
+    height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: auto;
-    flex-direction: row;
+    /*   flex-direction: row;
+    flex-wrap: wrap;
+
+    border: 1px solid red; */
 }
 
 .btn {
-    width: 60%;
-    height: 40%;
+    width: 100%;
+    height: 70%;
     /* background-color: blue; */
     margin: auto;
+
 }
 
 .onclick {
