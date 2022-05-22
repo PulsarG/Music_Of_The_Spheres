@@ -19,8 +19,10 @@
 import MenuButton from "@/ui/MenuButton.vue";
 import AudioLibsolar from "@/components/AudioLibsolar.vue";
 import AudioLibstars from "@/components/AudioLibstars.vue"
+
+import AudioItem from '@/ui/AudioItem.vue';
 export default {
-  components: { MenuButton, AudioLibsolar, AudioLibstars },
+  components: { MenuButton, AudioLibsolar, AudioLibstars, AudioItem },
   data() {
     return {
       but: {
