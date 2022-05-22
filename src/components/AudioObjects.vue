@@ -1,59 +1,15 @@
 <template>
     <div class="lib">
+
         <div class="btns">
             <button class="btn" @click="setLock('1');" v-bind:class="{ onclick: but[1] }">
-                Земля
+                Пульсар (PRS B0329+54)
             </button>
-            <button class="btn" @click="setLock('2')" v-bind:class="{ onclick: but[2] }">
-                Солнце
+            <button class="btn" @click="setLock('2');" v-bind:class="{ onclick: but[2] }">
+                Квазар
             </button>
-            <button class="btn" @click="setLock('3')" v-bind:class="{ onclick: but[3] }">
-                Луна
-            </button>
-            <button class="btn" @click="setLock('4')" v-bind:class="{ onclick: but[4] }">
-                Меркурий
-            </button>
-            <button class="btn" @click="setLock('5')" v-bind:class="{ onclick: but[5] }">
-                Венера
-            </button>
-        </div>
-        <div class="btns">
-            <button class="btn" @click="setLock('6');" v-bind:class="{ onclick: but[6] }">
-                Ветра Марса
-            </button>
-            <button class="btn" @click="setLock('7')" v-bind:class="{ onclick: but[7] }">
-                Юпитер
-            </button>
-            <button class="btn" @click="setLock('8')" v-bind:class="{ onclick: but[8] }">
-                Сатурн
-            </button>
-            <button class="btn" @click="setLock('9')" v-bind:class="{ onclick: but[9] }">
-                Уран
-            </button>
-            <button class="btn" @click="setLock('10')" v-bind:class="{ onclick: but[10] }">
-                Нептун
-            </button>
-        </div>
-        <div class="btns">
-            <button class="btn" @click="setLock('11');" v-bind:class="{ onclick: but[11] }">
-                Плутон
-            </button>
-            <button class="btn" @click="setLock('12')" v-bind:class="{ onclick: but[12] }">
-                Ганимед
-            </button>
-            <button class="btn" @click="setLock('13')" v-bind:class="{ onclick: but[13] }">
-                Ио
-            </button>
-            <button class="btn" @click="setLock('14')" v-bind:class="{ onclick: but[14] }">
-                Миранда
-            </button>
-            <button class="btn" @click="setLock('15')" v-bind:class="{ onclick: but[15] }">
-                Кольца Сатурна
-            </button>
-        </div>
-        <div class="btns">
-            <button class="btn" @click="setLock('16');" v-bind:class="{ onclick: but[16] }">
-                Титан
+            <button class="btn" @click="setLock('3');" v-bind:class="{ onclick: but[3] }">
+                Черная Дыра (GRS 1916+105)
             </button>
         </div>
 
@@ -112,12 +68,6 @@ export default {
                 active16: false,
             },
 
-            /* Items: {
-                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Africa_and_Europe_from_a_Million_Miles_Away.png/1024px-Africa_and_Europe_from_a_Million_Miles_Away.png",
-                audio: "http://drive.google.com/uc?export=view&id=1qoRFm_c0m7oRVFMGsoAIm2UHHY5JkOPP",
-                wiki: "https://ru.wikipedia.org/wiki/%D0%97%D0%B5%D0%BC%D0%BB%D1%8F",
-            }, */
-
             Items: [
                 {
                     id: 0,
@@ -126,14 +76,6 @@ export default {
                     wiki: "",
                     text: "",
                     name: ""
-                },
-                {
-                    id: 1,
-                    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Africa_and_Europe_from_a_Million_Miles_Away.png/1024px-Africa_and_Europe_from_a_Million_Miles_Away.png",
-                    audio: "http://drive.google.com/uc?export=view&id=1qoRFm_c0m7oRVFMGsoAIm2UHHY5JkOPP",
-                    wiki: "https://ru.wikipedia.org/wiki/%D0%97%D0%B5%D0%BC%D0%BB%D1%8F",
-                    text: "Земля́ — третья по удалённости от Солнца планета Солнечной системы. Самая плотная, пятая подиаметру и массе среди всех планет и крупнейшая среди планет земной группы, в которую входят также Меркурий, Венера и Марс.Единственное известное человеку в настоящее время тело во Вселенной, населённое живыми организмами.",
-                    name: "Земля",
                 },
             ],
 
@@ -172,7 +114,7 @@ export default {
 
         loadArr() {
             try {
-                axios.get("https://mots-e43e9-default-rtdb.europe-west1.firebasedatabase.app/solar.json")
+                axios.get("https://mots-e43e9-default-rtdb.europe-west1.firebasedatabase.app/objects.json")
                     .then((response) => {
                         let array = [];
                         for (var i in response.data)

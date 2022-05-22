@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <button class="btn" @click="setLock('0')" v-bind:class="{ onclick: but[0] }">
+    <button class="btn" @click="setLock('0');" v-bind:class="{ onclick: but[0] }">
       СОЛНЕЧНАЯ СИСТЕМА
     </button>
     <button class="btn" @click="setLock('1')" v-bind:class="{ onclick: but[1] }">
@@ -13,16 +13,18 @@
 
   <audio-libsolar v-show="but[0]"></audio-libsolar>
   <audio-libstars v-show="but[1]"></audio-libstars>
+  <audio-objects v-show="but[2]"></audio-objects>
 </template>
 
 <script>
 import MenuButton from "@/ui/MenuButton.vue";
 import AudioLibsolar from "@/components/AudioLibsolar.vue";
-import AudioLibstars from "@/components/AudioLibstars.vue"
+import AudioLibstars from "@/components/AudioLibstars.vue";
+import AudioObjects from "@/components/AudioObjects.vue";
 
 import AudioItem from '@/ui/AudioItem.vue';
 export default {
-  components: { MenuButton, AudioLibsolar, AudioLibstars, AudioItem },
+  components: { MenuButton, AudioLibsolar, AudioLibstars, AudioObjects, AudioItem, },
   data() {
     return {
       but: {

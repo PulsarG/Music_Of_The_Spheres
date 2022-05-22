@@ -1,8 +1,10 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link>
-  </nav>
-  <router-view/>
+  <div class="head">
+    <p><a href="https://en.wikipedia.org/wiki/Sonification">Сонификация</a> - метод перобразоования измеряемых данных в
+      звуковые колебания. </p>
+    <p>Все материалы взяты из открытых источников Wiki и NASA</p>
+  </div>
+  <router-view />
 </template>
 
 <style>
