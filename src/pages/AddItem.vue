@@ -37,7 +37,7 @@ export default {
             url: "http://drive.google.com/uc?export=view&id=",
 
             inp: "",
-            pass: "17178"
+            pass: ""
         }
     },
     methods: {
