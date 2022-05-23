@@ -1,19 +1,7 @@
-# mots
+Music of the Spheres
 
-## Project setup
-```
-npm install
-```
+(sound lib.)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+![image](https://user-images.githubusercontent.com/93667264/169874176-298fa21d-e32f-4966-8a42-9b94a03ef888.png)
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![image](https://user-images.githubusercontent.com/93667264/169874246-384a8920-904c-4b49-8599-71d4ab2cf28a.png)
