@@ -12,12 +12,13 @@
                 <textarea v-model="text" name="body" id="body" cols="30" rows="10" placeholder="TEXT"></textarea>
 
                 <div class="btns">
-                    <button @click="sendNews('solar');">Добавить к Солнечной Системе</button>
+                    <button @click="sendNews('solar');" id="bt" disabled>Добавить к Солнечной Системе</button>
 
-                    <button @click="sendNews('stars');">Добавить к Звездам</button>
+                    <!-- <button @click="sendNews('stars');">Добавить к Звездам</button> -->
 
-                    <button @click="sendNews('objects');">Добавить к Объектам</button>
+                    <button @click="sendNews('objects');" id="btt" disabled>Добавить к Объектам</button>
                 </div>
+                <input v-model="inp" type="">
             </div>
         </div>
     </div>
@@ -34,6 +35,9 @@ export default {
             text: "",
             name: "",
             url: "http://drive.google.com/uc?export=view&id=",
+
+            inp: "",
+            pass: "17178"
         }
     },
     methods: {
@@ -45,6 +49,14 @@ export default {
                 text: this.text,
                 name: this.name
             });
+        }
+    },
+    watch: {
+        inp(v) {
+            if (this.pass == v) {
+                document.getElementById('bt').removeAttribute('disabled');
+                document.getElementById('btt').removeAttribute('disabled');
+            }
         }
     }
 }

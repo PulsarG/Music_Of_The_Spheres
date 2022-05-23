@@ -3,7 +3,7 @@
 
         <div style="display:flex; flex-wrap: wrap;">
             <div class="btns" v-for="i in Items" :key="i.name">
-                <button v-show="i.name != null" class="btn" @click="settLock(i)">
+                <button id="bt" v-show="i.name != null" class="btn" @click="settLock(i); setColor(i.name);">
                     {{ i.name }}
                 </button>
             </div>
@@ -61,6 +61,12 @@ export default {
         settLock(i) {
             this.nItem = this.Items.indexOf(i);
         },
+
+        setColor(i) {
+            if (i == Items[nItem].name) {
+                document.getElementById('bt').style.backgroundColor = 'red;'
+            }
+        }
     }
 }
 </script>
@@ -68,7 +74,7 @@ export default {
 <style scoped>
 .lib {
     width: 50%;
-    height: auto;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,11 +86,11 @@ export default {
 
 .btns {
     width: 15%;
-    height: 60px;
+    height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: auto;
+    margin: 1px;
     /*   flex-direction: row;
     flex-wrap: wrap;
 
@@ -93,9 +99,10 @@ export default {
 
 .btn {
     width: 100%;
-    height: 70%;
+    height: 80%;
     /* background-color: blue; */
-    margin: auto;
+    margin: 1px;
+    border-radius: 50%;
 
 }
 
@@ -128,5 +135,9 @@ img {
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+
+p, h4, h3 {
+    color: aliceblue;
 }
 </style>
