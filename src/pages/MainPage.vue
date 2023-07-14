@@ -7,7 +7,7 @@
       ЗВЕЗДЫ
     </button> -->
     <button class="btn" @click="setLock('2')" v-bind:class="{ onclick: but[2] }">
-      ИНЫЕ ОБЪЕКТЫ
+      ИНЫЕ ОБЪЕКтЫ
     </button>
   </div>
 

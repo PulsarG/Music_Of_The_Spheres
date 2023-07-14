@@ -9,7 +9,7 @@ const routes = [
     component: MainPage,
   },
   {
-    path: '/add',
+    path: '/addnew',
     name: 'add',
     component: AddItem,
   },
